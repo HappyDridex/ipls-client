@@ -4,22 +4,16 @@ export const headerLinks: THeaderLinks = [
   {
     text: 'Обо мне',
     key: 'about',
-    items: [
-      {
-        text: 'Обо мне вложенный',
-        key: 'about1',
-        pathName: 'about',
-      },
-    ],
+    pathName: 'about',
   },
   {
     text: 'Аналитика',
-    key: 'analytics1',
+    key: 'analytics',
     items: [
       {
         text: 'point11',
         key: 'point11',
-        items: [{ text: 'Аналитика деталка', key: 'analytics', pathName: 'analytics' }],
+        items: [{ text: 'Аналитика test', key: 'analytics2', pathName: 'analytics' }],
       },
     ],
   },

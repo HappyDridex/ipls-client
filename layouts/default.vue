@@ -1,6 +1,7 @@
 <template>
     <div class="layout layout--default">
-        <LayoutHeaderBase class="layout__header" />
+        <LayoutHeaderBase class="layout__header"
+            :active-tab="activeHeaderTab" />
         <div class="layout__page">
             <UiButton v-if="showBackButton"
                 class="layout__back-button"
@@ -23,6 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
+import type { THeaderLinkKey } from '@/components/layout/Header/types';
+
 const props = defineProps({
     pageTitle: {
         type: String,
@@ -33,6 +37,11 @@ const props = defineProps({
         type: Boolean,
         required: false,
         default: false
+    },
+    activeHeaderTab: {
+        type: String as PropType<THeaderLinkKey>,
+        required: false,
+        default: ''
     }
 });
 

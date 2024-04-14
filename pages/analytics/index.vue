@@ -1,6 +1,7 @@
 <template>
     <div>
-        <NuxtLayout page-title="Юридическая аналитика">
+        <NuxtLayout page-title="Юридическая аналитика"
+            active-header-tab="analytics">
             <main class="page">
                 <ViewCommonContentArticlesWithTree article-target-route-name="analytics.article.detail" />
             </main>

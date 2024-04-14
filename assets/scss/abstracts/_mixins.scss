@@ -154,6 +154,38 @@
   transition: all $transition-duration $transition-function;
 }
 
+// animations
+
+@mixin scaling-underline(
+  $border-width: 1px,
+  $border-color: $border-col-secondary,
+  $always-active: false
+) {
+  position: relative;
+
+  &::after {
+    @include absolute-all-null;
+    @include base-transition;
+
+    content: '';
+    transform: scaleX(0);
+
+    border-bottom: $border-width solid $border-color;
+  }
+
+  @if $always-active {
+    &::after {
+      transform: scaleX(1);
+    }
+  } @else {
+    &:hover {
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
 // lists
 
 @mixin flex-item-width($num, $gap) {
@@ -185,6 +217,13 @@
 
 @mixin text-average($font-weight: $font-weight-regular, $line-height: $line-height-increased) {
   // 20 400 1.2
+  font-size: rem($font-size-average);
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+@mixin text-large($font-weight: $font-weight-semibold, $line-height: $line-height-increased) {
+  // 24 600 1.2
   font-size: rem($font-size-average);
   font-weight: $font-weight;
   line-height: $line-height;

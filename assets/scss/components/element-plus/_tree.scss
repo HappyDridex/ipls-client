@@ -37,22 +37,7 @@
         background-color: transparent !important;
       }
 
-      &::after {
-        @include absolute-all-null;
-
-        transform: scaleX(0);
-        border-bottom: 1px solid $border-col-secondary;
-
-        content: '';
-      }
-
-      &:hover {
-        &::after {
-          @include base-transition;
-
-          transform: scaleX(1);
-        }
-      }
+      @include scaling-underline;
     }
 
     &__expand-icon {

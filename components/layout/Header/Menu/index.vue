@@ -1,12 +1,14 @@
 <template>
     <div class="header-menu">
-        <LayoutHeaderMenuSection v-for="(key, idx) in activeKeys"
-            class="header-menu__section"
-            :active-keys="activeKeys"
-            :key="idx"
-            :element-index="idx"
-            :items="getSectionItems(key)"
-            @item:hover="(key) => onItemHover(key, idx)" />
+        <TransitionGroup name="slide-fade">
+            <LayoutHeaderMenuSection v-for="(key, idx) in activeKeys"
+                class="header-menu__section"
+                :active-keys="activeKeys"
+                :key="idx"
+                :element-index="idx"
+                :items="getSectionItems(key)"
+                @item:hover="(key) => onItemHover(key, idx)" />
+        </TransitionGroup>
     </div>
 </template>
 

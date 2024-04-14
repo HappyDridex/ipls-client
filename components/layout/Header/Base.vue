@@ -11,11 +11,11 @@
                         <li v-for="link in links"
                             :key="link.text"
                             class="header__links-item"
-                            @click="onMenuOpen(link.key)"
+                            @click="onLinkClick(link)"
                             @keypress.enter="onMenuOpen(link.key)">
                             <NuxtLink class="header__link"
                                 tabindex="0"
-                                :class="{ 'header__link--active': link.key === activeKey }">
+                                :class="{ 'header__link--active': link.key === activeKey || link.key === activeTab }">
                                 {{ link.text }}
                             </NuxtLink>
                         </li>
@@ -31,7 +31,7 @@
         </div>
 
         <Transition name="slide-top">
-            <div v-if="showMenu"
+            <div v-if="showMenu && activeKey"
                 class="header__menu container">
                 <LayoutHeaderMenu :links="links"
                     v-model="activeKey"
@@ -42,14 +42,32 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
+import type { THeaderLink, THeaderLinkKey } from './types';
 import { headerLinks as links } from '@/utils/dictionary/navigation';
 
-const activeKey = ref<string>('')
+defineProps({
+    activeTab: {
+        type: String as PropType<THeaderLinkKey>,
+        required: false,
+        default: ''
+    }
+})
+
+const activeKey = ref<THeaderLinkKey | ''>('')
 const showMenu = ref(false);
 
-const HEADER_SELECTOR = '.header'
+const HEADER_SELECTOR = '.header';
 
-function onMenuOpen(headerLinkKey: string) {
+function onLinkClick(link: THeaderLink) {
+    if (link.pathName) {
+        navigateTo({ name: link.pathName });
+    } else {
+        onMenuOpen(link.key);
+    }
+}
+
+function onMenuOpen(headerLinkKey: THeaderLinkKey) {
     showMenu.value = true;
     activeKey.value = headerLinkKey;
 
@@ -97,21 +115,10 @@ function onMenuClose() {
         position: relative;
         padding: rem($gap-tiny);
 
-        &:hover,
+        @include scaling-underline(2px, $border-col-primary);
+
         &--active {
-            &::after {
-                @include base-transition;
-
-                position: absolute;
-                left: 0;
-                bottom: 0;
-
-                width: 100%;
-
-                content: '';
-
-                border-bottom: 2px solid $border-col-primary;
-            }
+            @include scaling-underline(2px, $border-col-primary, true);
         }
     }
 

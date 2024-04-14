@@ -1,7 +1,10 @@
 <template>
     <div>
-        <NuxtLayout show-back-button>
-            <ViewArticleBase />
+        <NuxtLayout active-header-tab="analytics"
+            show-back-button>
+            <main>
+                <ViewArticleBase />
+            </main>
         </NuxtLayout>
     </div>
 </template>

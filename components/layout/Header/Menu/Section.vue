@@ -1,17 +1,15 @@
 <template>
-    <Transition name="slide-fade">
-        <ul v-if="items?.length"
-            class="header-menu-section">
-            <li class="header-menu-section__item"
-                v-for="item in items"
-                :key="item.key"
-                @mouseover="emit('item:hover', item.key)">
-                <LayoutHeaderMenuItem :item="item"
-                    :is-active="hasActiveKey(item)"
-                    :is-root="elementIndex === 0" />
-            </li>
-        </ul>
-    </Transition>
+    <ul v-if="items?.length"
+        class="header-menu-section">
+        <li class="header-menu-section__item"
+            v-for="item in items"
+            :key="item.key"
+            @mouseover="emit('item:hover', item.key)">
+            <LayoutHeaderMenuItem :item="item"
+                :is-active="hasActiveKey(item)"
+                :is-root="elementIndex === 0" />
+        </li>
+    </ul>
 </template>
 
 <script setup lang="ts">
