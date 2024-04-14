@@ -11,6 +11,7 @@
         </span>
         <UiIcon v-if="iconName"
             class="button__icon"
+            :class="{ 'button__icon--margin': !isIconed }"
             :name="iconName"
             :size="iconSize" />
         <slot />
@@ -23,7 +24,7 @@ import type { PropType } from 'vue';
 const NuxtLink = resolveComponent('NuxtLink');
 
 const THEMES = ['transparent-primary'];
-const SIZE = ['medium'];
+const SIZE = ['medium', 'big'];
 const ICON_SIZES = ['micro', 'mini', 'small', 'medium', 'big'];
 
 const props = defineProps({
@@ -161,7 +162,18 @@ const tagName = computed(() => props.isLink ? NuxtLink : 'button')
     &--iconed {
         @include flex-all-center;
 
+    }
+
+    &--iconed#{&}--size-medium {
         padding: rem($gap-micro);
+
+        border-radius: rem($border-radius-small);
+    }
+
+    &--iconed#{&}--size-big {
+        padding: rem($gap-tiny);
+
+        border-radius: rem($border-radius-small);
     }
 
     &--circled {
@@ -195,7 +207,9 @@ const tagName = computed(() => props.isLink ? NuxtLink : 'button')
     }
 
     &__icon {
-        margin-left: rem($gap-micro);
+        &--margin {
+            margin-left: rem($gap-micro);
+        }
     }
 }
 </style>

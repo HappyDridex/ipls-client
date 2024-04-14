@@ -1,7 +1,17 @@
 .tiptap {
+  font-family: $font-family-primary;
+
   padding: 0;
 
   outline: none;
+
+  h1 {
+    @include text-huge;
+  }
+
+  p {
+    @include text-normal;
+  }
 
   ul {
     list-style: initial;

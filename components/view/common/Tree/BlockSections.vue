@@ -33,6 +33,9 @@ const props = defineProps({
         required: false,
         default: true
     },
+    articleTargetRouteName: {
+
+    }
 })
 
 const router = useRouter();
@@ -127,11 +130,10 @@ function updateTreeValue(value: string) {
 
     &__item {
         $height-inner: 32px;
-        $padding: 16px;
 
         @include text-normal($font-weight-semibold);
 
-        height: rem(calc($height-inner + $padding));
+        height: rem($height-inner);
     }
 }
 </style>

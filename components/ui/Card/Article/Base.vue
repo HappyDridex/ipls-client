@@ -1,7 +1,13 @@
 <template>
     <article class="article-base-card"
         :class="cardClass">
-        <div class="article-base-card__inner">
+        <NuxtLink :to="{
+            name: articleRouteName,
+            params: {
+                id: card.id
+            }
+        }"
+            class="article-base-card__inner">
             <div class="article-base-card__image">
                 <img class="article-base-card__image-pic"
                     :src="card.img"
@@ -26,7 +32,7 @@
                     {{ card.description }}
                 </p>
             </div>
-        </div>
+        </NuxtLink>
     </article>
 </template>
 
@@ -43,6 +49,10 @@ const props = defineProps({
         type: String as PropType<TArticleCardType>,
         required: false,
         default: 'columned'
+    },
+    articleRouteName: {
+        type: String,
+        required: true
     }
 });
 

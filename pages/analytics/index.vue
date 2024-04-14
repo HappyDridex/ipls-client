@@ -2,7 +2,7 @@
     <div>
         <NuxtLayout page-title="Юридическая аналитика">
             <main class="page">
-                <ViewCommonContentArticlesWithTree />
+                <ViewCommonContentArticlesWithTree article-target-route-name="analytics.article.detail" />
             </main>
         </NuxtLayout>
     </div>

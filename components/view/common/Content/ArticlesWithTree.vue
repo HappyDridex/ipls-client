@@ -13,15 +13,8 @@
             <ul class="articles-with-tree__list">
                 <li class="articles-with-tree__list-item">
                     <UiCardArticleBase :card="card1"
-                        :type="card1.type" />
-                </li>
-                <li>
-                    <UiCardArticleBase :card="card1"
-                        :type="card1.type" />
-                </li>
-                <li>
-                    <UiCardArticleBase :card="card1"
-                        :type="card1.type" />
+                        :type="card1.type"
+                        :article-route-name="articleTargetRouteName" />
                 </li>
             </ul>
         </div>
@@ -29,12 +22,22 @@
 </template>
 
 <script setup lang="ts">
+import type { TArticleBaseCard } from '~/components/ui/Card/Article/types';
 
-const activeBlock = ref('');
+defineProps({
+    articleTargetRouteName: {
+        type: String,
+        required: true
+    }
+})
+
+const route = useRoute();
+
+const activeBlock = ref((route.query?.section as string) ?? '');
 
 const tags = [{ text: 'TAG' }, { text: 'TAG' }, { text: 'TAG' }, { text: 'TAG' }, { text: 'TAG' }]
 
-const card1 = {
+const card1: TArticleBaseCard = {
     id: 1,
     title: 'How collaboration makes us better designers',
     img: '/images/temp/article1.jpg',

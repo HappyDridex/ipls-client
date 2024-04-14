@@ -32,6 +32,11 @@
       z-index: $z-header;
     }
 
+    &__back-button {
+      width: fit-content;
+      margin-bottom: rem($gap-medium);
+    }
+
     &__meta {
       margin-top: rem($gap-medium);
       margin-bottom: rem($gap-big);
