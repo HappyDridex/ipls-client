@@ -42,7 +42,6 @@ const router = useRouter();
 
 const selectedValue = defineModel<string>();
 
-
 const tree = [
     {
         value: 'law1', label: 'Законотворчество', children: [
@@ -78,8 +77,7 @@ const tree = [
     }
 ]
 
-const treeRef = ref<any[]>([])
-
+const treeRef = ref<any>([])
 
 const commands = {
     setCurrentKey: 'setCurrentKey',
@@ -99,11 +97,14 @@ function onModelUpdate({ value }: any) {
 }
 
 function updateTreeValue(value: string) {
-    if (treeRef.value) {
+    if (treeRef.value && Array.isArray(treeRef.value)) {
         treeRef.value.forEach(ref => {
             ref.callTreeHandler(commands.setCurrentKey, null);
             ref.callTreeHandler(commands.setCurrentKey, value)
         })
+    } else {
+        treeRef.value.callTreeHandler(commands.setCurrentKey, null);
+        treeRef.value.callTreeHandler(commands.setCurrentKey, value)
     }
 };
 </script>

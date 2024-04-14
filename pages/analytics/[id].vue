@@ -15,5 +15,4 @@ definePageMeta({ name: 'analytics.article.detail' });
 const route = useRoute();
 
 const articleId = route.params.id;
-console.log('kek')
 </script>
