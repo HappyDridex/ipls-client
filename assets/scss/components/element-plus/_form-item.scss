@@ -1,0 +1,11 @@
+.el-form-item {
+  margin-bottom: 0;
+
+  &__label {
+    @include text-base;
+
+    display: inline-block;
+
+    margin-bottom: rem($gap-micro);
+  }
+}

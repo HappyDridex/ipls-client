@@ -1,0 +1,35 @@
+.tiptap {
+  padding: 0;
+
+  outline: none;
+
+  ul {
+    list-style: initial;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  ul,
+  ol {
+    padding-left: rem($gap-medium);
+  }
+
+  blockquote {
+    padding: rem($gap-micro);
+    margin-left: rem($gap-tiny);
+    border-left: rem(2px) solid $btn-col-primary-default;
+  }
+
+  a {
+    color: blue;
+
+    text-decoration: underline;
+  }
+
+  img {
+    max-width: 100% !important;
+    height: auto;
+  }
+}

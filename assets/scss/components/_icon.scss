@@ -1,0 +1,42 @@
+.icon {
+  &--micro {
+    //14
+    width: rem($icon-size-micro);
+    height: rem($icon-size-micro);
+  }
+
+  &--mini {
+    //16
+    width: rem($icon-size-mini);
+    height: rem($icon-size-mini);
+  }
+
+  &--small {
+    //20
+    width: rem($icon-size-small);
+    height: rem($icon-size-small);
+  }
+
+  &--medium {
+    //24
+    width: rem($icon-size-medium);
+    height: rem($icon-size-medium);
+  }
+
+  &--big {
+    //32
+    width: rem($icon-size-big);
+    height: rem($icon-size-big);
+  }
+
+  &--xl {
+    //48
+    width: rem($icon-size-xl);
+    height: rem($icon-size-xl);
+  }
+
+  &--full {
+    width: 100%;
+    height: 100%;
+  }
+}

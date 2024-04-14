@@ -1,0 +1,23 @@
+@import './base/fonts';
+@import './base/generic';
+@import './base/animations';
+
+// plugins
+@import './plugins/element-plus.css';
+@import './components/element-plus/index';
+@import './plugins/tiptap';
+@import './plugins/tippy';
+
+// components
+@import './components/icon';
+@import './components/heading';
+@import './components/form';
+
+// layouts
+@import './components/container';
+@import './components/layout';
+@import './components/page';
+
+.b {
+  border: 3px red solid;
+}

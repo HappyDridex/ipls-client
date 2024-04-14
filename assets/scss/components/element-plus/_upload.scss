@@ -1,0 +1,15 @@
+.el-upload {
+  &-dragger {
+    @include base-transition;
+
+    padding: rem($gap-small);
+    text-align: left;
+
+    border: 1px dashed $border-col-primary;
+    background-color: transparent;
+
+    &:hover {
+      border-color: $btn-col-primary-default;
+    }
+  }
+}

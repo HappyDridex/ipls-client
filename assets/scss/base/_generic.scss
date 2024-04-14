@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color: transparent;
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: $font-family-primary;
+  font-size: 100%;
+
+  color: $txt-col-primary;
+  background-color: $fill-col-primary;
+}
+
+body {
+  font-weight: $font-weight-regular;
+  line-height: $line-height-small;
+
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button {
+  @include reset-vertical-margin;
+
+  font-weight: $font-weight-regular;
+  line-height: $line-height-small;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  text-underline-offset: rem(2px);
+
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+
+  border: none;
+  outline: none;
+  background: none;
+
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+address {
+  font-style: normal;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input {
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    font-family: inherit;
+  }
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+svg {
+  $default-size: $icon-size-medium;
+
+  display: block;
+  flex-shrink: 0;
+
+  fill: currentColor;
+
+  width: rem($default-size);
+  height: rem($default-size);
+}

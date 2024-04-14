@@ -1,0 +1,16 @@
+.heading {
+  &--h3 {
+    // 20
+    @include text-huge;
+  }
+
+  &--h2 {
+    // 32
+    @include text-huge;
+  }
+
+  &--h1 {
+    // 48
+    @include text-xl;
+  }
+}

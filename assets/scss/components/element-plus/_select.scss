@@ -1,0 +1,96 @@
+.el-select {
+  &__wrapper {
+    @include text-normal;
+    @include base-transition;
+
+    height: rem($input-height-desktop);
+    padding: 0 rem($gap-mini);
+
+    border: rem(1) solid $border-col-primary;
+    border-radius: rem($border-radius-small);
+    background-color: transparent;
+    box-shadow: none;
+
+    &.is-focused {
+      border-color: $border-col-focused;
+      box-shadow: none;
+    }
+
+    &.is-hovering:not(.is-focused) {
+      box-shadow: none;
+    }
+  }
+
+  &__placeholder.is-transparent {
+    color: $txt-col-secondary;
+  }
+
+  &-dropdown {
+    &__list {
+      padding: rem($gap-tiny) 0;
+    }
+
+    &__item {
+      @include text-normal;
+
+      line-height: $input-height-desktop;
+
+      height: rem($input-height-desktop);
+      padding-left: rem($gap-small);
+      padding-right: rem($gap-small);
+
+      color: $txt-col-primary;
+
+      &::after {
+        display: none;
+      }
+
+      &.is-selected {
+        font-weight: $font-weight-regular;
+
+        color: $txt-col-primary;
+
+        span {
+          @include flex-space-between;
+
+          &::after {
+            content: '';
+            width: rem($icon-size-medium);
+            height: rem($icon-size-medium);
+
+            background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M8.94631 18.2346C8.59988 18.2344 8.26421 18.1142 7.99631 17.8946L3.51631 14.2246C2.90372 13.6924 2.8254 12.7696 3.33954 12.1418C3.85368 11.514 4.77384 11.4089 5.41631 11.9046L8.88631 14.7446L18.8863 5.53459C19.2622 5.08766 19.8633 4.8995 20.4269 5.05234C20.9905 5.20518 21.4142 5.67123 21.5128 6.24682C21.6114 6.82241 21.3669 7.40289 20.8863 7.73459L9.96631 17.8346C9.69 18.0935 9.32496 18.2367 8.94631 18.2346Z' fill='%234D6AFF'/></svg>");
+            background-size: contain;
+          }
+        }
+      }
+    }
+
+    &__empty {
+      @include text-normal;
+    }
+  }
+
+  &__popper.el-popper {
+    box-shadow: $box-shadow-default;
+
+    border-radius: rem($border-radius-normal);
+  }
+
+  &__caret {
+    color: $txt-col-primary !important;
+  }
+
+  &__icon {
+    width: rem($icon-size-mini) !important;
+    height: rem($icon-size-mini) !important;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__icon.is-reverse {
+    transform: rotate(180deg);
+  }
+}

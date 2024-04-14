@@ -1,0 +1,13 @@
+.page {
+  flex-grow: 1;
+
+  &--home & {
+    &__section {
+      @include y-margin-items($gap-xxl);
+    }
+  }
+
+  &__main {
+    width: 100%;
+  }
+}

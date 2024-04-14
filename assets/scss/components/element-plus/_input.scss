@@ -1,0 +1,30 @@
+.el-input {
+  &__wrapper {
+    @include base-transition;
+
+    height: rem($input-height-desktop);
+    padding: 0 rem($gap-mini);
+
+    border: rem(1) solid $border-col-primary;
+    border-radius: rem($border-radius-small);
+
+    &.is-focus {
+      box-shadow: 0 0 0 1px $border-col-focused inset;
+    }
+  }
+
+  &__inner {
+    @include text-normal;
+
+    height: 100%;
+    width: 100%;
+
+    border-color: transparent;
+
+    &::placeholder {
+      font-family: $font-family-primary;
+
+      color: $txt-col-secondary;
+    }
+  }
+}

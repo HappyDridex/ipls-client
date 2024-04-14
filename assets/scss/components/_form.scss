@@ -1,0 +1,11 @@
+.form {
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__col {
+    @include x-margin-items($gap-normal);
+    flex: 1;
+  }
+}

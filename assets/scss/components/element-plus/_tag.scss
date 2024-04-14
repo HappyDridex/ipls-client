@@ -1,0 +1,14 @@
+.el-tag {
+  @include text-normal;
+
+  height: rem(24px);
+  padding: 0 rem($gap-micro);
+
+  border-radius: rem($border-radius-minimal);
+  border: 1px solid $border-col-secondary;
+  background-color: $border-col-secondary;
+
+  &--info {
+    color: $txt-col-primary;
+  }
+}

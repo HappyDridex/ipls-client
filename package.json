@@ -1,0 +1,46 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^3.10.1",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5",
+    "pinia": "^2.1.7",
+    "sass": "^1.69.5",
+    "vue-tippy": "^6.4.1",
+    "@nuxtjs/svg-sprite": "^1.0.2",
+    "@pinia/nuxt": "^0.5.1",
+    "@popperjs/core": "npm:@sxzz/popperjs-es@^2.11.7",
+    "@tiptap/core": "^2.2.3",
+    "@tiptap/extension-blockquote": "^2.2.4",
+    "@tiptap/extension-bubble-menu": "^2.2.4",
+    "@tiptap/extension-color": "^2.2.4",
+    "@tiptap/extension-document": "^2.2.3",
+    "@tiptap/extension-image": "^2.2.4",
+    "@tiptap/extension-link": "^2.2.4",
+    "@tiptap/extension-text-align": "^2.2.4",
+    "@tiptap/extension-text-style": "^2.2.4",
+    "@tiptap/extension-typography": "^2.2.3",
+    "@tiptap/extension-underline": "^2.2.3",
+    "@tiptap/pm": "^2.2.2",
+    "@tiptap/starter-kit": "^2.2.3",
+    "@tiptap/vue-3": "^2.2.2",
+    "lodash": "^4.17.21",
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "@element-plus/nuxt": "^1.0.7",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/nuxt": "^10.6.1",
+    "element-plus": "^2.6.1",
+    "typescript": "^5.2.2"
+  }
+}
