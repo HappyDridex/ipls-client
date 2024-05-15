@@ -1,19 +1,21 @@
 export default function () {
-  const router = useRouter();
+    const router = useRouter()
 
-  const getCrumbs = (routerObj: typeof router) => {
-    if (!routerObj.currentRoute.value.meta?.crumbs) {
-      return [];
+    const getCrumbs = (routerObj: typeof router) => {
+        const currentRoute = routerObj.currentRoute.value
+
+        if (!currentRoute.meta?.crumbs) {
+            return []
+        }
+
+        return typeof currentRoute.meta.crumbs === 'function'
+            ? currentRoute.meta.crumbs(routerObj)
+            : JSON.parse(currentRoute.meta.crumbs as string)
     }
 
-    return typeof routerObj.currentRoute.value.meta.crumbs === 'function'
-      ? routerObj.currentRoute.value.meta.crumbs(routerObj)
-      : JSON.parse(routerObj.currentRoute.value.meta.crumbs as string);
-  };
+    const breadcrumbs = computed(() => {
+        return getCrumbs(router)
+    })
 
-  const breadcrumbs = computed(() => {
-    return getCrumbs(router);
-  });
-
-  return { breadcrumbs };
+    return { breadcrumbs }
 }

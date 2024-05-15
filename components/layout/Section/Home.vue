@@ -1,29 +1,34 @@
 <template>
-    <component :is="tag"
-        class="layout-section-home">
+    <component :is="tag" class="layout-section-home">
         <header class="layout-section-home__header">
             <h1 class="layout-section-home__title">
                 {{ title }}
             </h1>
             <span class="layout-section-home__separator"></span>
-            <UiButton v-if="detailLink"
+            <UiButton
+                v-if="detailLink"
                 class="layout-section-home__detail-button"
                 :text="detailLink.text"
                 icon-name="arrow-up-right"
                 is-link
-                :to="detailLink.to" />
+                :to="detailLink.to"
+            />
         </header>
         <div class="layout-section-home__content">
             <slot>
-                <UiGrid v-if="cards"
+                <UiGrid
+                    v-if="cards"
                     :items="cards"
                     :layout="cardsLayout"
                     :columns="columns"
-                    :gap="gap">
+                    :gap="gap"
+                >
                     <template #default="{ item }">
-                        <component :is="cardComponent"
+                        <component
+                            :is="cardComponent"
                             :card="item"
-                            :type="item.type" />
+                            :type="item.type"
+                        />
                     </template>
                 </UiGrid>
             </slot>
@@ -32,62 +37,60 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import type { TArticleBaseCard } from '@/components/ui/Card/Article/types';
+import type { PropType } from 'vue'
+import type { TArticleBaseCard } from '@/components/ui/Card/Article/types'
 
-const UiCardArticleBase = resolveComponent('UiCardArticleBase');
-const UiCardCategoryBase = resolveComponent('UiCardCategoryBase');
+const UiCardArticleBase = resolveComponent('UiCardArticleBase')
+const UiCardCategoryBase = resolveComponent('UiCardCategoryBase')
 
 const props = defineProps({
     title: {
         type: String,
-        required: true
+        required: true,
     },
     tag: {
         type: String,
         required: false,
-        default: 'section'
+        default: 'section',
     },
     detailLink: {
         type: Object as PropType<TDetailLink>,
         required: false,
-        default: null
+        default: null,
     },
     cards: {
         type: Array as PropType<TArticleBaseCard[]>,
-        required: false
+        required: false,
     },
     cardType: {
         type: String as PropType<'article' | 'category'>,
         required: false,
-        default: 'article'
+        default: 'article',
     },
     cardsLayout: {
         type: String,
         required: false,
-        default: '1,1,1'
+        default: '1,1,1',
     },
     columns: {
         type: Number,
         required: false,
-        default: 3
+        default: 3,
     },
     gap: {
         type: Number,
-        required: false
+        required: false,
     },
-});
+})
 
 type TDetailLink = {
-    text: string,
-    to: Partial<{ name: string, path: string, params: any, query: any }>
-};
+    text: string
+    to: Partial<{ name: string; path: string; params: any; query: any }>
+}
 
-const cardComponent = computed(() => (
-    props.cardType === 'article'
-        ? UiCardArticleBase
-        : UiCardCategoryBase))
-
+const cardComponent = computed(() =>
+    props.cardType === 'article' ? UiCardArticleBase : UiCardCategoryBase
+)
 </script>
 
 <style scoped lang="scss">
@@ -97,7 +100,7 @@ const cardComponent = computed(() => (
     &__header {
         display: flex;
         justify-content: space-between;
-        align-items: flex-end
+        align-items: flex-end;
     }
 
     &__title {
@@ -115,10 +118,8 @@ const cardComponent = computed(() => (
         border-bottom: rem(1px) solid $border-col-primary;
     }
 
-
     &__content {
         margin-top: rem($gap-big);
     }
-
 }
 </style>

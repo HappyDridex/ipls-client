@@ -1,34 +1,40 @@
 <template>
-    <article class="article-base-card"
-        :class="cardClass">
-        <NuxtLink :to="{
-            name: articleRouteName,
-            params: {
-                id: card.id
-            }
-        }"
-            class="article-base-card__inner">
+    <article class="article-base-card" :class="cardClass">
+        <NuxtLink
+            :to="{
+                name: articleRouteName,
+                params: {
+                    id: card.id,
+                },
+            }"
+            class="article-base-card__inner"
+        >
             <div class="article-base-card__image">
-                <img class="article-base-card__image-pic"
+                <img
+                    class="article-base-card__image-pic"
                     :src="card.img"
-                    alt="Иллюстрация статьи">
+                    alt="Иллюстрация статьи"
+                />
             </div>
 
             <div class="article-base-card__main">
                 <div class="article-base-card__meta">
-                    <UiTagList class="article-base-card__tags"
+                    <UiTagList
+                        class="article-base-card__tags"
                         v-if="card?.tags?.length"
-                        :tags="card.tags" />
-                    <time v-if="card?.time"
-                        class="article-base-card__time">
+                        :tags="card.tags"
+                    />
+                    <time v-if="card?.time" class="article-base-card__time">
                         {{ card.time }}
                     </time>
                 </div>
                 <h4 class="article-base-card__title">
                     {{ card.title }}
                 </h4>
-                <p v-if="card?.description"
-                    class="article-base-card__description">
+                <p
+                    v-if="card?.description"
+                    class="article-base-card__description"
+                >
                     {{ card.description }}
                 </p>
             </div>
@@ -37,28 +43,30 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import type { TArticleBaseCardData, TArticleCardType } from './types';
+import type { PropType } from 'vue'
+import type { TArticleBaseCardData, TArticleCardType } from './types'
 
 const props = defineProps({
     card: {
         type: Object as PropType<TArticleBaseCardData>,
-        required: true
+        required: true,
     },
     type: {
         type: String as PropType<TArticleCardType>,
         required: false,
-        default: 'columned'
+        default: 'columned',
     },
+    // TODO
     articleRouteName: {
         type: String,
-        required: true
-    }
-});
+        required: false,
+        default: 'analytics.article.detail',
+    },
+})
 
 const BASE_CLASS = 'article-base-card'
 
-const cardClass = computed(() => `${BASE_CLASS}--${props.type}`);
+const cardClass = computed(() => `${BASE_CLASS}--${props.type}`)
 </script>
 
 <style scoped lang="scss">
@@ -195,7 +203,6 @@ const cardClass = computed(() => `${BASE_CLASS}--${props.type}`);
         font-family: $font-family-secondary;
 
         text-transform: uppercase;
-
     }
 }
 </style>

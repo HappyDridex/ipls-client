@@ -1,18 +1,19 @@
 <template>
-    <div>
-        <NuxtLayout active-header-tab="analytics"
-            show-back-button>
-            <main>
-                <ViewArticleBase />
-            </main>
-        </NuxtLayout>
-    </div>
+    <main>
+        <ViewArticleBase />
+    </main>
 </template>
 
 <script setup lang="ts">
-definePageMeta({ name: 'analytics.article.detail' });
+definePageMeta({
+    name: 'analytics.article.detail',
+    backButton: {
+        text: 'Назад к боксу',
+        fallbackRoute: { name: 'analytics' },
+    },
+})
 
-const route = useRoute();
+const route = useRoute()
 
-const articleId = route.params.id;
+const articleId = route.params.id
 </script>

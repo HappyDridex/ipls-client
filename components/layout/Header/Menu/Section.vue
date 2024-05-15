@@ -1,42 +1,44 @@
 <template>
-    <ul v-if="items?.length"
-        class="header-menu-section">
-        <li class="header-menu-section__item"
+    <ul v-if="items?.length" class="header-menu-section">
+        <li
+            class="header-menu-section__item"
             v-for="item in items"
             :key="item.key"
-            @mouseover="emit('item:hover', item.key)">
-            <LayoutHeaderMenuItem :item="item"
+            @mouseover="emit('item:hover', item.key)"
+        >
+            <LayoutHeaderMenuItem
+                :item="item"
                 :is-active="hasActiveKey(item)"
-                :is-root="elementIndex === 0" />
+                :is-root="elementIndex === 0"
+            />
         </li>
     </ul>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import type { THeaderLink } from '../types';
+import type { PropType } from 'vue'
+import type { THeaderLink } from '../types'
 
 const emit = defineEmits(['item:hover'])
 
 const props = defineProps({
     items: {
         type: Array as PropType<THeaderLink['items']>,
-        required: true
+        required: true,
     },
     activeKeys: {
         type: Array as PropType<string[]>,
-        required: true
+        required: true,
     },
     elementIndex: {
         type: Number,
-        required: false
-    }
-});
+        required: false,
+    },
+})
 
 function hasActiveKey(item: THeaderLink) {
-    return props.activeKeys?.includes(item.key);
+    return props.activeKeys?.includes(item.key)
 }
-
 </script>
 
 <style scoped lang="scss">

@@ -8,22 +8,30 @@
             <div class="header__col">
                 <nav class="header__nav">
                     <ul class="header__links">
-                        <li v-for="link in links"
+                        <li
+                            v-for="link in links"
                             :key="link.text"
                             class="header__links-item"
                             @click="onLinkClick(link)"
-                            @keypress.enter="onMenuOpen(link.key)">
-                            <NuxtLink class="header__link"
+                            @keypress.enter="onMenuOpen(link.key)"
+                        >
+                            <NuxtLink
+                                class="header__link"
+                                active-class="header__link--active"
                                 tabindex="0"
-                                :class="{ 'header__link--active': link.key === activeKey || link.key === activeTab }">
+                                :class="{
+                                    'header__link--active':
+                                        link.key === activeKey ||
+                                        link.key === route.matched[0]?.name,
+                                }"
+                            >
                                 {{ link.text }}
                             </NuxtLink>
                         </li>
                     </ul>
                 </nav>
                 <div class="header__search">
-                    <button class="header__search-btn"
-                        tabindex="0">
+                    <button class="header__search-btn" tabindex="0">
                         <UiIcon name="loupe-search" />
                     </button>
                 </div>
@@ -31,33 +39,27 @@
         </div>
 
         <Transition name="slide-top">
-            <div v-if="showMenu && activeKey"
-                class="header__menu container">
-                <LayoutHeaderMenu :links="links"
+            <div v-if="showMenu && activeKey" class="header__menu container">
+                <LayoutHeaderMenu
+                    :links="links"
                     v-model="activeKey"
-                    @menu:close="onMenuClose" />
+                    @menu:close="onMenuClose"
+                />
             </div>
         </Transition>
     </header>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
 import type { THeaderLink, THeaderLinkKey } from './types';
 import { headerLinks as links } from '@/utils/dictionary/navigation';
 
-defineProps({
-    activeTab: {
-        type: String as PropType<THeaderLinkKey>,
-        required: false,
-        default: ''
-    }
-})
-
-const activeKey = ref<THeaderLinkKey | ''>('')
-const showMenu = ref(false);
+const route = useRoute();
 
 const HEADER_SELECTOR = '.header';
+
+const activeKey = ref<THeaderLinkKey | ''>('');
+const showMenu = ref(false);
 
 function onLinkClick(link: THeaderLink) {
     if (link.pathName) {
@@ -72,7 +74,7 @@ function onMenuOpen(headerLinkKey: THeaderLinkKey) {
     activeKey.value = headerLinkKey;
 
     useClickOutside(HEADER_SELECTOR, onMenuClose);
-};
+}
 
 function onMenuClose() {
     showMenu.value = false;
@@ -134,6 +136,5 @@ function onMenuClose() {
         position: relative;
         z-index: -1;
     }
-
 }
 </style>

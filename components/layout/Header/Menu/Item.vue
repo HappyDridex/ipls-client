@@ -1,51 +1,56 @@
 <template>
-    <component :is="wrapperTag"
+    <component
+        :is="wrapperTag"
         class="header-menu-item"
         :class="{
             'header-menu-item--active': isActive,
         }"
-        v-bind="linkAttrs">
-        <p class="header-menu-item__text"
+        v-bind="linkAttrs"
+    >
+        <p
+            class="header-menu-item__text"
             :class="{
-                'header-menu-item__text--highlighed': isRoot
-            }">
+                'header-menu-item__text--highlighed': isRoot,
+            }"
+        >
             {{ item.text }}
         </p>
-        <UiIcon v-if="hasNestedItems"
+        <UiIcon
+            v-if="hasNestedItems"
             class="header-menu-item__icon"
-            name="chevron-right" />
+            name="chevron-right"
+        />
     </component>
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import type { THeaderLink } from '../types';
+import type { PropType } from 'vue'
+import type { THeaderLink } from '../types'
 
-const NuxtLink = resolveComponent('NuxtLink');
+const NuxtLink = resolveComponent('NuxtLink')
 
 const props = defineProps({
     item: {
         type: Object as PropType<THeaderLink>,
-        required: true
+        required: true,
     },
     isActive: {
         type: Boolean,
-        required: false
+        required: false,
     },
     isRoot: {
         type: Boolean,
-        required: false
-    }
-});
+        required: false,
+    },
+})
 
-const hasNestedItems = computed(() => props.item?.items);
+const hasNestedItems = computed(() => props.item?.items)
 
-const wrapperTag = hasNestedItems.value ? 'div' : NuxtLink;
+const wrapperTag = hasNestedItems.value ? 'div' : NuxtLink
 
 const linkAttrs = hasNestedItems.value
     ? {}
-    : { to: { name: props.item.pathName } };
-
+    : { to: { name: props.item.pathName } }
 </script>
 
 <style scoped lang="scss">
@@ -67,10 +72,9 @@ const linkAttrs = hasNestedItems.value
 
         width: 100%;
 
-        content: "";
+        content: '';
 
         border-bottom: 1px solid $border-col-primary;
-
     }
 
     &__text {

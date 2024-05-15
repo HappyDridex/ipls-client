@@ -1,20 +1,22 @@
 <template>
     <div class="articles-with-tree">
-        <ViewCommonTreeBlockSections class="articles-with-tree__tree"
-            v-model="activeBlock" />
+        <ViewCommonTreeBlockSections
+            class="articles-with-tree__tree"
+            :tree="tree"
+            v-model="activeBlock"
+        />
         <div class="articles-with-tree__main">
-            <h2 class="articles-with-tree__title">
-                Популярные статьи
-            </h2>
+            <h2 class="articles-with-tree__title">Популярные статьи</h2>
 
-            <UiTagList :tags="tags"
-                class="articles-with-tree__tags" />
+            <UiTagList :tags="tags" class="articles-with-tree__tags" />
 
             <ul class="articles-with-tree__list">
                 <li class="articles-with-tree__list-item">
-                    <UiCardArticleBase :card="card1"
+                    <UiCardArticleBase
+                        :card="card1"
                         :type="card1.type"
-                        :article-route-name="articleTargetRouteName" />
+                        :article-route-name="articleTargetRouteName"
+                    />
                 </li>
             </ul>
         </div>
@@ -25,28 +27,38 @@
 import type { TArticleBaseCard } from '~/components/ui/Card/Article/types';
 
 defineProps({
+    tree: {
+        type: Array,
+        required: true,
+    },
     articleTargetRouteName: {
         type: String,
-        required: true
-    }
-})
+        required: true,
+    },
+});
 
 const route = useRoute();
 
 const activeBlock = ref((route.query?.section as string) ?? '');
 
-const tags = [{ text: 'TAG' }, { text: 'TAG' }, { text: 'TAG' }, { text: 'TAG' }, { text: 'TAG' }]
+const tags = [
+    { text: 'TAG' },
+    { text: 'TAG' },
+    { text: 'TAG' },
+    { text: 'TAG' },
+    { text: 'TAG' },
+];
 
 const card1: TArticleBaseCard = {
     id: 1,
     title: 'How collaboration makes us better designers',
     img: '/images/temp/article1.jpg',
-    description: 'Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better.Collaboration can make our teams stronger, and our individual designs better Collaboration can make our teams stronger, and our individual nnnn Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better.Collaboration can make our teams stronger, and our individual designs better Collaboration can make our teams stronger, and our individual nnnn',
+    description:
+        'Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better.Collaboration can make our teams stronger, and our individual designs better Collaboration can make our teams stronger, and our individual nnnn Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better. Collaboration can make our teams stronger, and our individual designs better.Collaboration can make our teams stronger, and our individual designs better Collaboration can make our teams stronger, and our individual nnnn',
     time: '11 окт. 2024',
     tags: [{ text: 'Tag' }, { text: 'Tag' }, { text: 'Tag' }],
-    type: 'rowed'
+    type: 'rowed',
 };
-
 </script>
 
 <style scoped lang="scss">

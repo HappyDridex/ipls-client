@@ -1,101 +1,106 @@
 <template>
-    <component :is="tagName"
+    <component
+        :is="tagName"
         class="button"
         v-bind="attrs"
         :class="buttonClasses"
-        :disabled="isDisabled">
-        <span v-if="text && !isIconed"
-            class="button__text"
-            itemprop="name">
+        :disabled="isDisabled"
+    >
+        <span v-if="text && !isIconed" class="button__text" itemprop="name">
             {{ text }}
         </span>
-        <UiIcon v-if="iconName"
+        <UiIcon
+            v-if="iconName"
             class="button__icon"
             :class="{ 'button__icon--margin': !isIconed }"
             :name="iconName"
-            :size="iconSize" />
+            :size="iconSize"
+        />
         <slot />
     </component>
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+const NuxtLink = resolveComponent('NuxtLink')
 
-import type { PropType } from 'vue';
-const NuxtLink = resolveComponent('NuxtLink');
-
-const THEMES = ['transparent-primary'];
-const SIZE = ['medium', 'big'];
-const ICON_SIZES = ['micro', 'mini', 'small', 'medium', 'big'];
+const THEMES = ['transparent-primary']
+const SIZE = ['medium', 'big']
+const ICON_SIZES = ['micro', 'mini', 'small', 'medium', 'big']
 
 const props = defineProps({
     text: {
         type: String,
         required: false,
-        default: null
+        default: null,
     },
     full: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
     },
     theme: {
-        type: String as PropType<typeof THEMES[number]>,
+        type: String as PropType<(typeof THEMES)[number]>,
         required: false,
-        default: 'transparent-primary'
+        default: 'transparent-primary',
     },
     size: {
-        type: String as PropType<typeof SIZE[number]>,
+        type: String as PropType<(typeof SIZE)[number]>,
         required: false,
-        default: 'medium'
+        default: 'medium',
     },
     iconName: {
         type: String,
         required: false,
-        default: null
+        default: null,
     },
     iconSize: {
-        type: String as PropType<typeof ICON_SIZES[number]>,
+        type: String as PropType<(typeof ICON_SIZES)[number]>,
         required: false,
-        default: 'small'
+        default: 'small',
     },
     isDisabled: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
     },
     isActive: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
     },
     isReversed: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
     },
     isText: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
     },
     isLink: {
         type: Boolean,
         required: false,
-        default: false
-    }
-});
+        default: false,
+    },
+})
 
-const attrs = useAttrs();
+defineOptions({
+    inheritAttrs: false,
+})
 
-const BASE_CLASS = 'button';
+const attrs = useAttrs()
 
-const isIconed = computed(() => props.iconName && !props.text);
+const BASE_CLASS = 'button'
+
+const isIconed = computed(() => props.iconName && !props.text)
 
 const buttonClasses = computed(() => {
-    const classes = [];
+    const classes = []
 
-    classes.push(`${BASE_CLASS}--theme-${props.theme}`);
-    classes.push(`${BASE_CLASS}--size-${props.size}`);
+    classes.push(`${BASE_CLASS}--theme-${props.theme}`)
+    classes.push(`${BASE_CLASS}--size-${props.size}`)
 
     if (props.isActive) {
         classes.push(`${BASE_CLASS}--active`)
@@ -116,10 +121,9 @@ const buttonClasses = computed(() => {
     }
 
     return classes
-});
+})
 
-const tagName = computed(() => props.isLink ? NuxtLink : 'button')
-
+const tagName = computed(() => (props.isLink ? NuxtLink : 'button'))
 </script>
 
 <style lang="scss" scoped>
@@ -156,12 +160,12 @@ const tagName = computed(() => props.isLink ? NuxtLink : 'button')
             background-color: $fill-col-primary-invert;
         }
 
-        &:disabled {}
+        &:disabled {
+        }
     }
 
     &--iconed {
         @include flex-all-center;
-
     }
 
     &--iconed#{&}--size-medium {
@@ -189,7 +193,6 @@ const tagName = computed(() => props.isLink ? NuxtLink : 'button')
     }
 
     &--is-text {
-
         &,
         &:hover,
         &:focus {
