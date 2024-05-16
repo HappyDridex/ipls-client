@@ -4,7 +4,7 @@ export const headerLinks: THeaderLinks = [
     {
         text: 'Обо мне',
         key: 'about',
-        pathName: 'about',
+        route: { name: 'about' },
     },
     {
         text: 'Аналитика',
@@ -12,18 +12,18 @@ export const headerLinks: THeaderLinks = [
         items: [
             {
                 text: 'Поданалитика',
-                key: 'point11',
+                key: 'subanalytics',
                 items: [
                     {
                         text: 'Подподаналитика',
-                        key: 'analytics2',
-                        pathName: 'analytics',
+                        key: 'subsubanalytics',
+                        route: { name: 'analytics' },
                     },
                 ],
             },
         ],
     },
-    { text: 'Творчество в праве', key: 'art' },
-    { text: 'Обучение', key: 'study' },
-    { text: 'Проектная работа', key: 'project' },
+    { text: 'Творчество в праве', key: 'art', route: { name: 'art' } },
+    { text: 'Обучение', key: 'study', route: { name: 'study' } },
+    { text: 'Проектная работа', key: 'project', route: { name: 'project' } },
 ];

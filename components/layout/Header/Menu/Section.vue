@@ -16,10 +16,10 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import type { THeaderLink } from '../types'
+import type { PropType } from 'vue';
+import type { THeaderLink } from '../types';
 
-const emit = defineEmits(['item:hover'])
+const emit = defineEmits(['item:hover']);
 
 const props = defineProps({
     items: {
@@ -34,10 +34,10 @@ const props = defineProps({
         type: Number,
         required: false,
     },
-})
+});
 
 function hasActiveKey(item: THeaderLink) {
-    return props.activeKeys?.includes(item.key)
+    return props.activeKeys?.includes(item.key);
 }
 </script>
 

@@ -21,12 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-const NuxtLink = resolveComponent('NuxtLink')
+import type { PropType } from 'vue';
+const NuxtLink = resolveComponent('NuxtLink');
 
-const THEMES = ['transparent-primary']
-const SIZE = ['medium', 'big']
-const ICON_SIZES = ['micro', 'mini', 'small', 'medium', 'big']
+const THEMES = ['transparent-primary'];
+const SIZE = ['medium', 'big'];
+const ICON_SIZES = ['micro', 'mini', 'small', 'medium', 'big'];
 
 const props = defineProps({
     text: {
@@ -48,6 +48,21 @@ const props = defineProps({
         type: String as PropType<(typeof SIZE)[number]>,
         required: false,
         default: 'medium',
+    },
+    sharp: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    circled: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    noBorder: {
+        type: Boolean,
+        required: false,
+        default: false,
     },
     iconName: {
         type: String,
@@ -84,46 +99,58 @@ const props = defineProps({
         required: false,
         default: false,
     },
-})
+});
 
 defineOptions({
     inheritAttrs: false,
-})
+});
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
-const BASE_CLASS = 'button'
+const BASE_CLASS = 'button';
 
-const isIconed = computed(() => props.iconName && !props.text)
+const isIconed = computed(() => props.iconName && !props.text);
 
 const buttonClasses = computed(() => {
-    const classes = []
+    const classes = [];
 
-    classes.push(`${BASE_CLASS}--theme-${props.theme}`)
-    classes.push(`${BASE_CLASS}--size-${props.size}`)
+    classes.push(`${BASE_CLASS}--theme-${props.theme}`);
+    classes.push(`${BASE_CLASS}--size-${props.size}`);
 
     if (props.isActive) {
-        classes.push(`${BASE_CLASS}--active`)
+        classes.push(`${BASE_CLASS}--active`);
     }
 
     if (props.full) {
-        classes.push('button--full')
+        classes.push('button--full');
     }
 
     if (props.isReversed) {
-        classes.push('button--reversed')
+        classes.push('button--reversed');
+    }
+
+    if (props.noBorder) {
+        classes.push('button--no-border');
+    }
+
+    if (props.circled) {
+        classes.push('button--circled');
+    }
+
+    if (props.sharp) {
+        classes.push('button--sharp');
     }
 
     if (isIconed.value) {
-        classes.push('button--iconed')
+        classes.push('button--iconed');
     } else if (props.isText) {
-        classes.push('button--is-text')
+        classes.push('button--is-text');
     }
 
-    return classes
-})
+    return classes;
+});
 
-const tagName = computed(() => (props.isLink ? NuxtLink : 'button'))
+const tagName = computed(() => (props.isLink ? NuxtLink : 'button'));
 </script>
 
 <style lang="scss" scoped>
@@ -168,6 +195,18 @@ const tagName = computed(() => (props.isLink ? NuxtLink : 'button'))
         @include flex-all-center;
     }
 
+    &--iconed#{&}--theme-primary {
+        color: $txt-col-primary;
+        border: 1px solid $border-col-primary;
+        background-color: transparent;
+
+        &:hover,
+        &:active {
+            color: $txt-col-primary-invert;
+            background-color: $fill-col-primary-invert;
+        }
+    }
+
     &--iconed#{&}--size-medium {
         padding: rem($gap-micro);
 
@@ -175,17 +214,22 @@ const tagName = computed(() => (props.isLink ? NuxtLink : 'button'))
     }
 
     &--iconed#{&}--size-big {
-        padding: rem($gap-tiny);
+        width: rem(40px);
+        height: rem(40px);
 
         border-radius: rem($border-radius-small);
     }
 
     &--circled {
-        border-radius: 50%;
+        border-radius: 50% !important;
     }
 
     &--sharp {
-        border-radius: 0;
+        border-radius: 0 !important;
+    }
+
+    &--no-border {
+        border: none !important;
     }
 
     &--reversed {

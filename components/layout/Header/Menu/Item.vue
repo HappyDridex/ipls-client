@@ -24,10 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import type { THeaderLink } from '../types'
+import type { PropType } from 'vue';
+import type { THeaderLink } from '../types';
 
-const NuxtLink = resolveComponent('NuxtLink')
+const NuxtLink = resolveComponent('NuxtLink');
 
 const props = defineProps({
     item: {
@@ -42,15 +42,13 @@ const props = defineProps({
         type: Boolean,
         required: false,
     },
-})
+});
 
-const hasNestedItems = computed(() => props.item?.items)
+const hasNestedItems = computed(() => props.item?.items);
 
-const wrapperTag = hasNestedItems.value ? 'div' : NuxtLink
+const wrapperTag = hasNestedItems.value ? 'div' : NuxtLink;
 
-const linkAttrs = hasNestedItems.value
-    ? {}
-    : { to: { name: props.item.pathName } }
+const linkAttrs = hasNestedItems.value ? {} : { to: props.item.route };
 </script>
 
 <style scoped lang="scss">

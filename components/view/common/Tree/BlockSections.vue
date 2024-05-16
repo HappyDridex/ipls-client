@@ -7,6 +7,8 @@
                 node-key="value"
                 ref="treeRef"
                 highlight-current
+                expty-text="Вложений не найдено"
+                :indent="36"
                 :data="tree"
                 :default-expanded-keys="[selectedValue]"
                 :current-node-key="selectedValue"
@@ -50,9 +52,14 @@ const treeRef = ref<any>([]);
 
 const commands = {
     setCurrentKey: 'setCurrentKey',
+    getCurrentKey: 'getCurrentKey',
 };
 
-function onModelUpdate({ value }: any) {
+function onModelUpdate({ value, label }: { value: string; label: string }) {
+    if (value === selectedValue.value) {
+        return;
+    }
+
     selectedValue.value = value;
 
     if (props.pushToQuery && router.currentRoute.value?.name) {
@@ -66,14 +73,23 @@ function onModelUpdate({ value }: any) {
 }
 
 function updateTreeValue(value: string) {
-    if (treeRef.value && Array.isArray(treeRef.value)) {
-        treeRef.value.forEach((ref) => {
-            ref.callTreeHandler(commands.setCurrentKey, null);
-            ref.callTreeHandler(commands.setCurrentKey, value);
+    if (!treeRef.value) {
+        return;
+    }
+    console.log('treeRef.value', treeRef.value);
+
+    if (Array.isArray(treeRef.value)) {
+        treeRef.value.forEach((ref: any) => {
+            queueMicrotask(() => {
+                ref.callTreeHandler(commands.setCurrentKey, null);
+                ref.callTreeHandler(commands.setCurrentKey, value);
+            });
         });
     } else {
-        treeRef.value.callTreeHandler(commands.setCurrentKey, null);
-        treeRef.value.callTreeHandler(commands.setCurrentKey, value);
+        queueMicrotask(() => {
+            treeRef.value.callTreeHandler(commands.setCurrentKey, null);
+            treeRef.value.callTreeHandler(commands.setCurrentKey, value);
+        });
     }
 }
 </script>
@@ -104,7 +120,11 @@ function updateTreeValue(value: string) {
 
         @include text-normal($font-weight-semibold);
 
+        line-height: rem($height-inner);
+
         height: rem($height-inner);
+        margin-right: auto;
+        margin-left: rem($gap-tiny);
     }
 }
 </style>

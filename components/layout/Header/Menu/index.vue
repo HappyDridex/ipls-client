@@ -1,13 +1,15 @@
 <template>
     <div class="header-menu">
         <TransitionGroup name="slide-fade">
-            <LayoutHeaderMenuSection v-for="(key, idx) in activeKeys"
+            <LayoutHeaderMenuSection
+                v-for="(key, idx) in activeKeys"
                 class="header-menu__section"
                 :active-keys="activeKeys"
                 :key="idx"
                 :element-index="idx"
                 :items="getSectionItems(key)"
-                @item:hover="(key) => onItemHover(key, idx)" />
+                @item:hover="(key) => onItemHover(key, idx)"
+            />
         </TransitionGroup>
     </div>
 </template>
@@ -21,7 +23,7 @@ import { findElementByKey } from '@/utils/helpers';
 const props = defineProps({
     links: {
         type: Array as PropType<THeaderLinks>,
-        required: true
+        required: true,
     },
 });
 
@@ -41,17 +43,18 @@ function onItemHover(key: string, idx: number) {
     activeKeys.value.length = pos + rootElOffset;
 }
 
-watch(activeSectionKey, (newKey) => {
-    if (newKey) {
-        activeKeys.value = [newKey];
-    }
-},
+watch(
+    activeSectionKey,
+    (newKey) => {
+        if (newKey) {
+            activeKeys.value = [newKey];
+        }
+    },
     { immediate: true }
 );
-
 </script>
 
-<style scoped lang=scss>
+<style scoped lang="scss">
 .header-menu {
     display: flex;
 

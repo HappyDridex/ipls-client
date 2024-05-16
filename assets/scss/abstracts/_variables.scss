@@ -100,7 +100,7 @@ $icon-size-small: 20px;
 $icon-size-mini: 16px;
 $icon-size-micro: 14px;
 
-$header-height-desktop: 60px;
+$header-height-desktop: 124px;
 $footer-min-height-desktop: 262px;
 
 $input-height-desktop: 44px;
@@ -108,8 +108,11 @@ $input-height-desktop: 44px;
 /**
 * Breakpoints
 */
-$screen-tablet: '(min-width: 768px)';
-$screen-desktop: '(min-width: 1280px)';
+$screen-mobile: '(max-width: 767px)';
+$screen-tablet: '(max-width: 1279px)';
+
+@media #{$screen-tablet} {
+}
 
 /**
 * Layout
@@ -118,7 +121,7 @@ $container-width-mobile: 375px;
 $container-width-tablet: 768px;
 $container-width-desktop: 1440px;
 
-$container-horizontal-padding: 64px;
+$container-horizontal-padding: 24px;
 
 /**
 * Radius

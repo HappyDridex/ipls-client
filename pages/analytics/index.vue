@@ -12,6 +12,7 @@ import { analyticsTree } from '@/utils/TEMP';
 
 definePageMeta({
     name: 'analytics',
+    pageTitle: 'Юридическая аналитика',
     crumbs: () => [
         {
             name: 'home',

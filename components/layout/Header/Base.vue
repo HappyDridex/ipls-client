@@ -12,8 +12,10 @@
                             v-for="link in links"
                             :key="link.text"
                             class="header__links-item"
-                            @click="onLinkClick(link)"
-                            @keypress.enter="onMenuOpen(link.key)"
+                            @click="onHeaderLinkClick(link)"
+                            @keypress.enter="
+                                onMenuOpen(link.key as THeaderLinkKey)
+                            "
                         >
                             <NuxtLink
                                 class="header__link"
@@ -29,6 +31,15 @@
                             </NuxtLink>
                         </li>
                     </ul>
+
+                    <div class="header__nav-sidebar-button">
+                        <UiButton
+                            no-border
+                            size="big"
+                            theme="primary"
+                            icon-name="burger-menu"
+                        />
+                    </div>
                 </nav>
                 <div class="header__search">
                     <button class="header__search-btn" tabindex="0">
@@ -61,11 +72,22 @@ const HEADER_SELECTOR = '.header';
 const activeKey = ref<THeaderLinkKey | ''>('');
 const showMenu = ref(false);
 
-function onLinkClick(link: THeaderLink) {
-    if (link.pathName) {
-        navigateTo({ name: link.pathName });
+watch(
+    () => route.path,
+    (to, from) => {
+        if (to !== from) {
+            onMenuClose();
+        }
+    }
+);
+
+function onHeaderLinkClick(link: THeaderLink) {
+    if (link.route) {
+        navigateTo(link.route);
+    } else if (link.key) {
+        onMenuOpen(link.key as THeaderLinkKey);
     } else {
-        onMenuOpen(link.key);
+        console.warn('onHeaderLinkClick: no link key provided');
     }
 }
 
@@ -104,9 +126,23 @@ function onMenuClose() {
         align-items: center;
     }
 
+    &__nav {
+        &-sidebar-button {
+            display: none;
+
+            @media #{$screen-tablet} {
+                display: block;
+            }
+        }
+    }
+
     &__links {
         display: flex;
         align-items: center;
+
+        @media #{$screen-tablet} {
+            display: none;
+        }
 
         &-item {
             @include x-margin-items($gap-mini);
